@@ -1,0 +1,73 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:local="clr-namespace:TcpChatClientWPF">
+
+    <Style x:Key="SendButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Path x:Name="Rectangle" Data="M17.679,37.116393 L17.679,37.310502 17.721501,37.149054 z M0.54859924,0.5 L64.644304,37.505654 0.54859924,74.511299 0.57290077,50.581369 17.644001,37.443454 17.650568,37.418509 17.496,37.418509 17.496,37.115509 17.677851,37.115509 0.5,23.914638 z" Fill="#FF5D9D8B" Stretch="Fill" Stroke="#FF353738" StrokeLineJoin="Round"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True"/>
+                        <Trigger Property="IsDefaulted" Value="True"/>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Fill" TargetName="Rectangle" Value="#FF40CDA5"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                        <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                        <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                                        <GradientStop Color="#FF25B20E" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Fill" TargetName="Rectangle" Value="#FF29A434"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False"/>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AllTextBox" TargetType="{x:Type Control}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Control}">
+                    <Border x:Name="bg" BorderBrush="Black" BorderThickness="1" Background="White">
+                        <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="bg" Value="Black"/>
+                            <Setter Property="BorderThickness" TargetName="bg" Value="1"/>
+                            
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="bg" Value="black"/>
+                            <Setter Property="BorderThickness" TargetName="bg" Value="1"/>
+                          
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/CustomizedWindow/VS2012WindowStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>
