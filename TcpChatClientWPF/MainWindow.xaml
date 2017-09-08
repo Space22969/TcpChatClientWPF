@@ -33,7 +33,7 @@
         <RichTextBox  Style="{StaticResource AllTextBox}" x:Name="RichBox" Grid.Column="1" Margin="10,10,10,80" Grid.Row="1" BorderBrush="Black">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="RichTextBox"/>
+                    <Run/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
