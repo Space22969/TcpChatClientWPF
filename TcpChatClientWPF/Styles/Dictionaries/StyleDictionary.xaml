@@ -65,7 +65,70 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="SimpleButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.02*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.02*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.03*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.03*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Background="Black">
+                            <StackPanel.BitmapEffect>
+                                <DropShadowBitmapEffect Direction="90" ShadowDepth="2" Softness="0.3" Color="#FFB0B0B0"/>
+                            </StackPanel.BitmapEffect>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Background="Black">
+                            <StackPanel.BitmapEffect>
+                                <DropShadowBitmapEffect Direction="90" ShadowDepth="2" Softness="0.3" Color="#FFB0B0B0"/>
+                            </StackPanel.BitmapEffect>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="5" Grid.RowSpan="5" Background="Black">
+                            <StackPanel.BitmapEffect>
+                                <DropShadowBitmapEffect Direction="90" ShadowDepth="2" Softness="0.3" Color="#FFB0B0B0"/>
+                            </StackPanel.BitmapEffect>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Background="Black">
+                            <StackPanel.BitmapEffect>
+                                <DropShadowBitmapEffect Direction="90" ShadowDepth="2" Softness="0.3" Color="#FFB0B0B0"/>
+                            </StackPanel.BitmapEffect>
+                        </StackPanel>
+
+                        <StackPanel x:Name="stackPanel" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="#FF40CDA5"/>
+
+                        <ContentPresenter Grid.ColumnSpan="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Grid.RowSpan="4" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True"/>
+                        <Trigger Property="IsDefaulted" Value="True"/>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFD81313"/>
+                            <Setter Property="Background" TargetName="stackPanel" Value="#FF3FE6B7"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="stackPanel" Value="#FF40CD60"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="stackPanel" Value="#FF7E8382"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Styles/CustomizedWindow/VS2012WindowStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
