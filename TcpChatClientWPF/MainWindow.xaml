@@ -29,8 +29,8 @@
         </Grid.RowDefinitions>
         <TextBox  Style="{StaticResource AllTextBox}" Grid.Column="1" Margin="10,0,82,10" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" Grid.ColumnSpan="2" Height="55" VerticalAlignment="Bottom" BorderBrush="Black" SelectionBrush="Black"/>
         <Button Style="{StaticResource SendButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,20,10" Grid.Row="1" Width="36" Height="55" VerticalAlignment="Bottom"/>
-        <ListBox  Style="{StaticResource AllTextBox}" Grid.Column="2" Margin="10,10,10,80" Grid.Row="1" BorderBrush="Black"/>
-        <RichTextBox  Style="{StaticResource AllTextBox}" x:Name="RichBox" Grid.Column="1" Margin="10,10,10,80" Grid.Row="1" BorderBrush="Black">
+        <ListBox  x:Name="Online" Style="{StaticResource AllTextBox}" Grid.Column="2" Margin="10,10,10,80" Grid.Row="1" BorderBrush="Black"/>
+        <RichTextBox  Style="{StaticResource AllTextBox}" x:Name="ChatBody" Grid.Column="1" Margin="10,10,10,80" Grid.Row="1" BorderBrush="Black">
             <FlowDocument>
                 <Paragraph>
                     <Run/>

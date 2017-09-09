@@ -7,7 +7,9 @@
         x:Class="TcpChatClientWPF.LoginWindow"
         mc:Ignorable="d"
         Title="LoginWindow" Height="300" Width="300"
-        Style="{StaticResource VS2012WindowStyle}">
+        Icon="Content/Images/icons8-Chat-96.png"
+        MaxWidth="299" MaxHeight="300"
+        Style="{StaticResource VS2012WindowStyle}" WindowStartupLocation="CenterScreen" MinWidth="299" MinHeight="300" Closed="LoginWindowClosed">
     <Grid Background="LightGreen">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -19,6 +21,12 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Content="Настройки" Style="{StaticResource SimpleButton}" Grid.Column="2" Width="80px" Height="25px" />
+        <Button x:Name="SettingsButton" Click="SettingsButton_Click" Content="Настройки" Style="{StaticResource SimpleButton}" Grid.Column="2" Width="80px" Height="25px" Margin="5,10,10,49" />
+        <Button x:Name="SignInButton" Click="SignInButton_Click" Content="Вход" Style="{StaticResource SimpleButton}" Width="80px" Height="25px" Margin="30,30,78,29" Grid.Row="2" Grid.ColumnSpan="2" />
+        <Button x:Name="RegButton" Click="RegButton_Click" Content="Регистрация" Style="{StaticResource SimpleButton}" Width="80px" Height="25px" Margin="85,30,24,29" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" />
+        <TextBox x:Name="Login" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="0,70,0,0" TextWrapping="Wrap" Text="space22" VerticalAlignment="Top" Width="120" Grid.RowSpan="2"/>
+        <Label Content="Логин:" HorizontalAlignment="Left" Margin="30,66,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label Content="Пароль:" HorizontalAlignment="Left" Margin="30,34,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <PasswordBox x:Name="Password" Grid.Column="1" HorizontalAlignment="Left" Margin="0,37,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="120" Height="23"/>
     </Grid>
 </Window>
