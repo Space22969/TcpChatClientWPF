@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TcpChatClientWPF
 {
@@ -25,7 +27,7 @@ namespace TcpChatClientWPF
     public partial class LoginWindow : Window
     {
         static string userName;
-        private string host = "";
+        static public string host = "";
         private const int port = 8888;
         static TcpClient client;
         static NetworkStream stream;
@@ -72,6 +74,7 @@ namespace TcpChatClientWPF
                     formatter.Serialize(stream, tempMes);
                     //Зпускаем новый поток для получения данных
                     receiveThread = new Thread(new ThreadStart(ReceiveMessage));
+                    receiveThread.SetApartmentState(ApartmentState.STA);
                     receiveThread.Start();
                 }
                 catch (Exception ex)
@@ -103,15 +106,19 @@ namespace TcpChatClientWPF
                     {
                         MessageBox.Show("Вы успешно авторизировались!");//вывод сообщения
 
-                        this.Dispatcher.Invoke(new Action(() =>
-                        {
-                            this.Visibility = Visibility.Hidden;
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                (ThreadStart)delegate ()
+                {
+                    this.Visibility = Visibility.Hidden;
+                   
+                    MainWindow mainForm = new MainWindow(RecMes.UserName, client, stream, new ObservableCollection<string>(UsersOnline));
+          
+                    mainForm.Show();
+                   // this.Close();
+                }
+            );
 
-                        }));
-
-                       
-                        MainWindow mainForm = new MainWindow(RecMes.UserName, client, stream, UsersOnline);
-                        mainForm.Show();
+                      
                         flag = false;
                     }
                     else if (RecMes.type == "online")

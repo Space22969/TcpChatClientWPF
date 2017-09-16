@@ -8,7 +8,13 @@
         Title="RegisterWindow" Height="300" Width="300"
         Style="{StaticResource VS2012WindowStyle}"
          Icon="Content/Images/icons8-Chat-96.png">
-    <Grid>
-        
+    <Grid Background="LightGreen">
+        <TextBox x:Name="Login" HorizontalAlignment="Left" Height="23" Margin="83,65,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="170"/>
+        <TextBox x:Name="Password"  HorizontalAlignment="Left" Height="23" Margin="83,122,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="170"/>
+        <Label Content="Пароль" HorizontalAlignment="Left" Margin="17,119,0,0" VerticalAlignment="Top"/>
+        <Label Content="Логин" HorizontalAlignment="Left" Margin="17,62,0,0" VerticalAlignment="Top"/>
+        <Button Click="EndRegBut_Click" Content="Зарегестрироваться" HorizontalAlignment="Left" Margin="17,208,0,0" VerticalAlignment="Top" Width="125"/>
+        <Button Click="ExitRegBut_Click" Content="Закрыть" HorizontalAlignment="Left" Margin="188,208,0,0" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Window>

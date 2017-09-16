@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TcpChatClientWPF
 {
@@ -38,6 +39,106 @@ namespace TcpChatClientWPF
             stream = iNstream;
             host = inHost;
             port = inPort;
+        }
+
+        private void EndRegBut_Click(object sender, RoutedEventArgs e)
+        {
+            if ((Login.Text.Length != 0) && (Password.Text.Length != 0))//Проверка полей
+            {
+                userName = Login.Text;
+
+                if (userName.Length < 3)
+                    MessageBox.Show("Слишком короткое имя!");
+                else
+                {
+                    string pass = Password.Text;
+
+                    try
+                    {
+                        client = new TcpClient();
+                        client.Connect(host, port); //Подключение к хосту
+
+                        stream = client.GetStream(); //Получение потока сети
+
+                        tempMes = new CoreServer.Message("connection", userName, "", "", null);//Отправка сообщения на запрос подключения
+                        formatter.Serialize(stream, tempMes);
+
+                        tempMes = new CoreServer.Message("regg", userName, pass, DateTime.Now.ToString(), null);//Отправка сообщения на запрос регистрации
+                        formatter.Serialize(stream, tempMes);
+
+
+                        //Запускаем новый поток для получения сообщений
+                        receiveThread = new Thread(new ThreadStart(ReceiveMessage));
+                        
+                        receiveThread.Start(); //Старт потока
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        public void ReceiveMessage()//Получение и обработка входящих сообщений
+        {
+            bool flag = true;
+            while (flag)
+            {
+                try
+                {
+                    CoreServer.Message RecMes;
+
+                    IFormatter formatter = new BinaryFormatter();
+                    RecMes = (CoreServer.Message)formatter.Deserialize(stream);//Десериализация сообщения
+
+                    if (RecMes.type == "regansvNo")//Отрицательных ответ на запрос регистрации
+                    {
+                        MessageBox.Show(RecMes.body);//вывод 
+                        Disconnect();
+                        flag = false;
+                    }
+                    else if (RecMes.type == "regansvYes")//Положительных ответ на запрос регистрации
+                    {
+                        MessageBox.Show(RecMes.body);//Вывод сообщения
+
+                        //Закрытие формы и отключение от сервера
+                        //this.Invoke(new Action(() =>
+                        // {
+                        this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+          (ThreadStart)delegate ()
+          {
+              this.Visibility = Visibility.Hidden;
+              this.Close();
+              // this.Close();
+          });
+
+                     
+                       // }));
+                        Disconnect();
+                        flag = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Подключение прервано!"); //соединение было разрвано
+                    break;
+                }
+            }
+        }
+
+        static void Disconnect()
+        {
+            if (stream != null)
+                stream.Close();//отключение потока
+            if (client != null)
+                client.Close();//отключение клиента 
+        }
+
+        private void ExitRegBut_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

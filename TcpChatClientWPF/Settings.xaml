@@ -8,7 +8,11 @@
         Title="Settings" Height="300" Width="300"
         Style="{StaticResource VS2012WindowStyle}"
         Icon="Content/Images/icons8-Chat-96.png">
-    <Grid>
-        
+    <Grid Background="LightGreen">
+        <TextBox x:Name="inputAddress" HorizontalAlignment="Left" Height="23" Margin="31,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="229"/>
+        <Label Content="Ip-адрес сервера:" HorizontalAlignment="Left" Margin="31,67,0,0" VerticalAlignment="Top"/>
+        <Button Click="SaveSettings_Click" Content="Сохранить" HorizontalAlignment="Left" Margin="31,191,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button Click="CloseSettings_Click" Content="Закрыть" HorizontalAlignment="Left" Margin="180,191,0,0" VerticalAlignment="Top" Width="80"/>
+
     </Grid>
 </Window>
